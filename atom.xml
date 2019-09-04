@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://youw3.github.io/</id>
     <title>Gridea</title>
-    <updated>2019-09-04T11:37:14.799Z</updated>
+    <updated>2019-09-04T11:50:58.301Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://youw3.github.io/"/>
     <link rel="self" href="https://youw3.github.io//atom.xml"/>
@@ -10,6 +10,27 @@
     <logo>https://youw3.github.io//images/avatar.png</logo>
     <icon>https://youw3.github.io//favicon.ico</icon>
     <rights>All rights reserved 2019, Gridea</rights>
+    <entry>
+        <title type="html"><![CDATA[用Maven创建Spark项目dependency注意事项]]></title>
+        <id>https://youw3.github.io//post/yong-maven-chuang-jian-spark-xiang-mu-dependency-zhu-yi-shi-xiang</id>
+        <link href="https://youw3.github.io//post/yong-maven-chuang-jian-spark-xiang-mu-dependency-zhu-yi-shi-xiang">
+        </link>
+        <updated>2019-09-04T11:38:06.000Z</updated>
+        <content type="html"><![CDATA[ <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-sql_${scala.binary.version}</artifactId>
+            <version>${spark.version}</version>
+            <scope>provided</scope>
+  </dependency>
+<pre><code>今天学习用maven创建Spark项目时，导入依赖的时候，多加了一行&lt;scope&gt;属性，导致运行scala代码的时候报错&quot;java.lang.NoClassDefFoundError: org/apache/spark/sql/SparkSession&quot;。
+这是因为我把scala代码放在了src/main/scala文件夹下，而&lt;scope&gt;provided&lt;/scope&gt;的意思是：默认main文件夹下已经有了该依赖环境，所以不会再添加该依赖，导致代码报缺少该依赖的错误。
+解决方法有：1.删除&lt;scope&gt;这行，这样maven会在全局添加该依赖；
+2.把scala代码放至src/test/scala文件夹下，由于这时代码不在main文件夹，所以maven会将该依赖添加至test文件夹中。
+
+总结：现在还是菜鸡一个，应该加强对maven的学习。
+</code></pre>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[Hello Gridea]]></title>
         <id>https://youw3.github.io//post/hello-gridea</id>
